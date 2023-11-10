@@ -31,14 +31,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool isValue = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        setState(() {
+          isValue = !isValue;
+        });
+      },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add, color: Colors.white),
+        elevation: 5,
+        splashColor: Colors.grey,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(60.0))),
+      ),
       body: Container(
         child: FlareActor(
           "animation/Resizing House.flr",
           alignment: Alignment.center,
           fit: BoxFit.cover,
+          animation: isValue == false ? "Demo Mode" : "Sun Rotate",
         ),
       ),
     );
