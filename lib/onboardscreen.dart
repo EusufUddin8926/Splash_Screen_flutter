@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:splash_screen/share_pref.dart';
 
 import 'main.dart';
 
@@ -40,7 +41,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
       ],
       onDone: () {
         Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => MyApp()));
+            context, CupertinoPageRoute(builder: (context) => const sharePreference()));
       },
       done: const Text("Done"),
       skip: const Text("Skip"),
