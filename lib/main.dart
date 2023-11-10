@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,20 +37,29 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isValue = false;
 
   @override
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      Navigator.push(context as BuildContext, CupertinoPageRoute(builder: (context)=> HomePage()));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        setState(() {
-          isValue = !isValue;
-        });
-      },
+      /*floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            isValue = !isValue;
+          });
+        },
         backgroundColor: Colors.blue,
-        child: const Icon(Icons.add, color: Colors.white),
         elevation: 5,
         splashColor: Colors.grey,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(60.0))),
-      ),
+        child: const Icon(Icons.add, color: Colors.white),
+      ),*/
       body: Container(
         child: FlareActor(
           "animation/Resizing House.flr",
