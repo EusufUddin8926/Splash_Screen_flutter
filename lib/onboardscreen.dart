@@ -42,10 +42,10 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
         Navigator.push(
             context, CupertinoPageRoute(builder: (context) => MyApp()));
       },
-      done: Text("Done"),
-      skip: Text("Skip"),
+      done: const Text("Done"),
+      skip: const Text("Skip"),
       showSkipButton: false,
-      next: Text("Next"),
+      next: const Text("Next"),
       showNextButton: true,
       dotsDecorator: const DotsDecorator(
           color: Colors.blue,

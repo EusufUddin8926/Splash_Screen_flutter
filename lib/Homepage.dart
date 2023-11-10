@@ -66,12 +66,14 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 20,
           ),
-          ElevatedButton(
+          OutlinedButton(
               onPressed: () {
                 Navigator.push(context,
                     CupertinoPageRoute(builder: (context) => const OnBoardScreen()));
               },
-              child: Text("OnBoard Screen"))
+              child: Text("OnBoard Screen", style: TextStyle(color: Colors.black),),
+
+          )
         ],
       ),
     );
