@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+
+import 'onboardscreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,24 +40,39 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blue,
         elevation: 5.0,
       ),
-      body: SizedBox(
-        height: 400,
-        child: CarouselSlider.builder(
-            slideBuilder: (index) {
-              return Container(
-                alignment: Alignment.center,
-                color: colors[index],
-                child: Text(
-                  letters[index],
-                  style: TextStyle(fontSize: 200, color: Colors.white),
-                ),
-              );
-            },
-            slideTransform: const CubeTransform(),
-            slideIndicator: CircularSlideIndicator(
-              padding: const EdgeInsets.only(bottom: 32),
+      body: Column(
+        children: [
+          Container(
+            child: SizedBox(
+              height: 400,
+              child: CarouselSlider.builder(
+                  slideBuilder: (index) {
+                    return Container(
+                      alignment: Alignment.center,
+                      color: colors[index],
+                      child: Text(
+                        letters[index],
+                        style: TextStyle(fontSize: 200, color: Colors.white),
+                      ),
+                    );
+                  },
+                  slideTransform: const CubeTransform(),
+                  slideIndicator: CircularSlideIndicator(
+                    padding: const EdgeInsets.only(bottom: 32),
+                  ),
+                  itemCount: colors.length),
             ),
-            itemCount: colors.length),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (context) => const OnBoardScreen()));
+              },
+              child: Text("OnBoard Screen"))
+        ],
       ),
     );
   }

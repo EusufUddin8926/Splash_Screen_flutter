@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
             isValue = !isValue;
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(60.0))),
         child: const Icon(Icons.add, color: Colors.white),
-      ),*/
+      ),
       body: Container(
         child: FlareActor(
           "animation/Resizing House.flr",
