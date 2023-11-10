@@ -36,32 +36,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: const Text("Home Page"),
         backgroundColor: Colors.blue,
         elevation: 5.0,
       ),
       body: Column(
         children: [
-          Container(
-            child: SizedBox(
-              height: 400,
-              child: CarouselSlider.builder(
-                  slideBuilder: (index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: colors[index],
-                      child: Text(
-                        letters[index],
-                        style: TextStyle(fontSize: 200, color: Colors.white),
-                      ),
-                    );
-                  },
-                  slideTransform: const CubeTransform(),
-                  slideIndicator: CircularSlideIndicator(
-                    padding: const EdgeInsets.only(bottom: 32),
-                  ),
-                  itemCount: colors.length),
-            ),
+          SizedBox(
+            height: 400,
+            child: CarouselSlider.builder(
+                slideBuilder: (index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    color: colors[index],
+                    child: Text(
+                      letters[index],
+                      style: TextStyle(fontSize: 200, color: Colors.white),
+                    ),
+                  );
+                },
+                slideTransform: const CubeTransform(),
+                slideIndicator: CircularSlideIndicator(
+                  padding: const EdgeInsets.only(bottom: 32),
+                ),
+                itemCount: colors.length),
           ),
           SizedBox(
             height: 20,
