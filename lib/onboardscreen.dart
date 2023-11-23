@@ -41,7 +41,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
       ],
       onDone: () {
         Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => const sharePreference()));
+            context, CupertinoPageRoute(builder: (context) => const SharePreference()));
       },
       done: const Text("Done"),
       skip: const Text("Skip"),

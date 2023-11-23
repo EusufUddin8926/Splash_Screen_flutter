@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 
-class sharePreference extends StatefulWidget {
-  const sharePreference({super.key});
+class SharePreference extends StatefulWidget {
+  const SharePreference({super.key});
 
   @override
-  State<sharePreference> createState() => _sharePreferenceState();
+  State<SharePreference> createState() => _SharePreferenceState();
 }
 
-class _sharePreferenceState extends State<sharePreference> {
+class _SharePreferenceState extends State<SharePreference> {
   int count = 0;
-  late TextEditingController _textController;
+  final  TextEditingController _nameTextController = TextEditingController();
+  final  TextEditingController _ageTextController = TextEditingController();
 
   @override
   void initState() {
-    _textController = TextEditingController();
+
+
     super.initState();
   }
 
   @override
   void dispose() {
-    _textController.dispose();
+    _nameTextController.dispose();
+    _ageTextController.dispose();
     super.dispose();
   }
 
@@ -55,41 +58,55 @@ class _sharePreferenceState extends State<sharePreference> {
         return AlertDialog(
           backgroundColor: Colors.blue,
           insetPadding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0),
-          contentPadding: const EdgeInsets.all(10.0),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
+          clipBehavior: Clip.hardEdge,
           title: const Text("Enter Your Details",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24, color: Colors.white)),
           content: SizedBox(
-            height: 300,
+            height: 250,
             width: MediaQuery.of(context).size.width,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: TextFormField(
-                    controller: _textController,
-                    maxLines: 1,
-                    autofocus: true,
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      hintText: "Enter your name here",
-                      hintStyle: TextStyle(fontSize: 16, color: Colors.white),
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                        borderSide: BorderSide(width: 1, color: Colors.white),
-                      ),
+                 TextField(
+                  controller: _nameTextController,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide: BorderSide(width: 1, color: Colors.white),
-                      ),
-                    ),
-                  ),
+                          borderSide:
+                              BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      hintText: "Enter your name",
+                      labelText: "Name"),
                 ),
+                const SizedBox(
+                  height: 12,
+                ),
+                 TextField(
+                  controller: _ageTextController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      hintText: "Enter your age",
+                      labelText: "Age"),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(onPressed: () {
+                  setState(() {
+                    print(_nameTextController.text);
+                    print(_ageTextController.text);
+                  });
+                }, child: const Text("Save Info"))
               ],
             ),
           ),
