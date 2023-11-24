@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:json_serializable/json_serializable.dart';
 import 'package:flutter/material.dart';
+import 'details.dart';
 
 class SharePreference extends StatefulWidget {
   const SharePreference({super.key});
@@ -9,13 +12,12 @@ class SharePreference extends StatefulWidget {
 
 class _SharePreferenceState extends State<SharePreference> {
   int count = 0;
-  final  TextEditingController _nameTextController = TextEditingController();
-  final  TextEditingController _ageTextController = TextEditingController();
+  final TextEditingController _nameTextController = TextEditingController();
+  final TextEditingController _ageTextController = TextEditingController();
+  List<Details> detailsList = [];
 
   @override
   void initState() {
-
-
     super.initState();
   }
 
@@ -68,7 +70,7 @@ class _SharePreferenceState extends State<SharePreference> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                 TextField(
+                TextField(
                   controller: _nameTextController,
                   decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -85,7 +87,7 @@ class _SharePreferenceState extends State<SharePreference> {
                 const SizedBox(
                   height: 12,
                 ),
-                 TextField(
+                TextField(
                   controller: _ageTextController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -101,12 +103,18 @@ class _SharePreferenceState extends State<SharePreference> {
                       labelText: "Age"),
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(onPressed: () {
-                  setState(() {
-                    print(_nameTextController.text);
-                    print(_ageTextController.text);
-                  });
-                }, child: const Text("Save Info"))
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        Details details = Details(
+                            _nameTextController.text, _ageTextController.text);
+                        detailsList.add(details);
+
+                        _nameTextController.clear();
+                        _ageTextController.clear();
+                      });
+                    },
+                    child: const Text("Save Info"))
               ],
             ),
           ),
