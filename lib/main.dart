@@ -71,3 +71,169 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
+/*import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class User {
+  late String name;
+  late int age;
+
+  User({required this.name, required this.age});
+
+  Map<String, dynamic> toMap() {
+    return {'name': name, 'age': age};
+  }
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      name: map['name'] as String,
+      age: map['age'] as int,
+    );
+  }
+
+  String toJson() => jsonEncode(toMap());
+
+  factory User.fromJson(String json) => User.fromMap(jsonDecode(json));
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('User Management'),
+      ),
+      body: const UserList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddDialog(context),
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _showAddDialog(BuildContext context) {
+    String name = "";
+    int age = 0;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add User'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                onChanged: (value) => name = value,
+                decoration: InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                onChanged: (value) => age = int.tryParse(value) ?? 0,
+                decoration: InputDecoration(labelText: 'Age'),
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                _saveUser(User(name: name, age: age));
+                _getUsers();
+                Navigator.pop(context);
+
+              },
+              child: Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _saveUser(User user) async {
+    List<User> users = await _getUsers();
+    users.add(user);
+
+    List<String> userStrings = users.map((user) => user.toJson()).toList();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('users', userStrings);
+  }
+
+  Future<List<User>> _getUsers() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? userStrings = prefs.getStringList('users');
+
+    if (userStrings != null && userStrings.isNotEmpty) {
+      List<User> users = userStrings.map((userString) => User.fromJson(userString)).toList();
+      return users;
+    } else {
+      return [];
+    }
+  }
+}
+
+class UserList extends StatefulWidget {
+  const UserList({super.key});
+
+  @override
+  State<UserList> createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _getUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          List<User> users = snapshot.data as List<User>;
+
+          return ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Name: ${users[index].name}, Age: ${users[index].age}'),
+              );
+            },
+          );
+        }
+      },
+    );
+  }
+}
+
+
+  Future<List<User>> _getUsers() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? userStrings = prefs.getStringList('users');
+
+    if (userStrings != null && userStrings.isNotEmpty) {
+      List<User> users = userStrings.map((userString) => User.fromJson(userString)).toList();
+      return users;
+    } else {
+      return [];
+    }
+  }*/
+

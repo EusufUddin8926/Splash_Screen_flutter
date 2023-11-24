@@ -1,20 +1,25 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
 
-@JsonSerializable()
-class Details{
+Details DetailsFromJson(String str) => Details.fromJson(json.decode(str));
 
-  late String _name;
-  late String _age;
+String DetailsToJson(Details data) => json.encode(data.toJson());
 
+class Details {
+  final String? name;
+  final String? age;
 
-  Details(this._name, this._age);
+  Details({
+    this.name,
+    this.age,
+  });
 
-  String get name => _name;
-  set name(String value) => _name = value;
+  factory Details.fromJson(Map<String, dynamic> json) => Details(
+    name: json["name"],
+    age: json["age"],
+  );
 
-
-
-  String get age => _age;
-  set age(String value) => _age = value;
-
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "age": age,
+  };
 }

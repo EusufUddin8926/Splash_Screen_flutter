@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:json_serializable/json_serializable.dart';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'details.dart';
 
@@ -15,6 +15,8 @@ class _SharePreferenceState extends State<SharePreference> {
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _ageTextController = TextEditingController();
   List<Details> detailsList = [];
+  List<String> detailsListString = [];
+  Details details = Details();
 
   @override
   void initState() {
@@ -106,9 +108,28 @@ class _SharePreferenceState extends State<SharePreference> {
                 ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        Details details = Details(
-                            _nameTextController.text, _ageTextController.text);
-                        detailsList.add(details);
+
+                        Map<String, dynamic> map = {
+                          'name': _nameTextController.text,
+                          'age': _ageTextController.text
+                        };
+
+                        String rawJson = jsonEncode(map);
+
+                        detailsListString.add(rawJson);
+                        String sampleStringList = jsonEncode(detailsListString);
+
+                        print(sampleStringList);
+
+                        var sampleJsonMap = json.decode(sampleStringList);
+
+// convert json map list to object model lis
+                        List<Details> sampleListFromPreferance = List<Details>.from(sampleJsonMap.map((x) => Details.fromJson(x)));
+
+                        print(sampleListFromPreferance);
+
+
+
 
                         _nameTextController.clear();
                         _ageTextController.clear();
@@ -123,3 +144,6 @@ class _SharePreferenceState extends State<SharePreference> {
     );
   }
 }
+
+
+
