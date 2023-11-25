@@ -111,8 +111,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  late Future<List<User>> _userList;
+
+  @override
+  void initState() {
+    super.initState();
+    _userList = _getUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +131,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('User Management'),
       ),
-      body: const UserList(),
+      body: UserList(userList: _userList),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddDialog(context),
         child: Icon(Icons.add),
@@ -155,9 +166,7 @@ class MyHomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 _saveUser(User(name: name, age: age));
-                _getUsers();
                 Navigator.pop(context);
-
               },
               child: Text('Save'),
             ),
@@ -168,13 +177,17 @@ class MyHomePage extends StatelessWidget {
   }
 
   Future<void> _saveUser(User user) async {
-    List<User> users = await _getUsers();
+    List<User> users = await _userList;
     users.add(user);
 
     List<String> userStrings = users.map((user) => user.toJson()).toList();
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList('users', userStrings);
+
+    setState(() {
+      _userList = _getUsers();
+    });
   }
 
   Future<List<User>> _getUsers() async {
@@ -190,21 +203,18 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class UserList extends StatefulWidget {
-  const UserList({super.key});
+class UserList extends StatelessWidget {
+  final Future<List<User>> userList;
 
-  @override
-  State<UserList> createState() => _UserListState();
-}
+  UserList({required this.userList});
 
-class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getUsers(),
+      future: userList,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
@@ -222,18 +232,5 @@ class _UserListState extends State<UserList> {
       },
     );
   }
-}
-
-
-  Future<List<User>> _getUsers() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? userStrings = prefs.getStringList('users');
-
-    if (userStrings != null && userStrings.isNotEmpty) {
-      List<User> users = userStrings.map((userString) => User.fromJson(userString)).toList();
-      return users;
-    } else {
-      return [];
-    }
-  }*/
+}*/
 
