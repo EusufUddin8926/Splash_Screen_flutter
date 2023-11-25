@@ -13,12 +13,12 @@ class SharePreference extends StatefulWidget {
 }
 
 class _SharePreferenceState extends State<SharePreference> {
+
   int count = 0;
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _ageTextController = TextEditingController();
   List<Details> detailsList = [];
   List<String> detailsListString = [];
-  List<Details> sampleListFromPreferance = [];
   late Future<List<Details>> _detailsList;
 
   Future<void> _insertDetails(Details details) async {
@@ -164,7 +164,7 @@ class userList extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(future: detailsList, builder: (context, snapshot){
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       } else if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}');
       } else {
