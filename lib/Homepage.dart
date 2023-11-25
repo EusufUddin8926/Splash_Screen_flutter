@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
+import 'FormValidator.dart';
 import 'onboardscreen.dart';
 
 class HomePage extends StatefulWidget {
@@ -70,6 +71,15 @@ class _HomePageState extends State<HomePage> {
                     CupertinoPageRoute(builder: (context) => const OnBoardScreen()));
               },
               child: Text("OnBoard Screen", style: TextStyle(color: Colors.black),),
+
+          ),
+          SizedBox(height: 20),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (context) => FormValidator()));
+            },
+            child: const Text("Form Validator", style: TextStyle(color: Colors.black),),
 
           )
         ],
