@@ -21,6 +21,8 @@ class _SharePreferenceState extends State<SharePreference> {
   List<String> detailsListString = [];
   late Future<List<Details>> _detailsList;
 
+
+
   Future<void> _insertDetails(Details details) async {
     var getUserList = await _getDetails();
     getUserList.add(details);
@@ -68,7 +70,7 @@ class _SharePreferenceState extends State<SharePreference> {
       appBar: AppBar(
           title: const Text("SharePreference Demo"),
           backgroundColor: Colors.blue),
-      body: userList(detailsList: _detailsList),
+      body: UserList(detailsList: _detailsList),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _showDialog();
@@ -95,70 +97,68 @@ class _SharePreferenceState extends State<SharePreference> {
           title: const Text("Enter Your Details",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24, color: Colors.white)),
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextField(
-                    controller: _nameTextController,
-                    decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(12))),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(12))),
-                        hintText: "Enter your name",
-                        labelText: "Name"),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextField(
-                    controller: _ageTextController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(12))),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius: BorderRadius.all(Radius.circular(12))),
-                        hintText: "Enter your age",
-                        labelText: "Age"),
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _insertDetails(Details(name: _nameTextController.text,
-                              age: _ageTextController.text));
-                          _nameTextController.clear();
-                          _ageTextController.clear();
-                          Navigator.pop(context);
-                        });
-                      },
-                      child: const Text("Save Info"))
-                ],
-              ),
-            ],
+          content: SizedBox(
+            height: 230,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: _nameTextController,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      hintText: "Enter your name",
+                      labelText: "Name", labelStyle: TextStyle(color: Colors.black))
+                  ,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextField(
+                  controller: _ageTextController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      hintText: "Enter your age",
+                      labelText: "Age", labelStyle: TextStyle(color: Colors.black)),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _insertDetails(Details(name: _nameTextController.text,
+                            age: _ageTextController.text));
+                        _nameTextController.clear();
+                        _ageTextController.clear();
+                        Navigator.pop(context);
+                      });
+                    },
+                    child: const Text("Save Info"))
+              ],
+            ),
           ),
         );
       },
     );
   }
 }
-class userList extends StatelessWidget {
+class UserList extends StatelessWidget {
   late Future<List<Details>> detailsList;
-  userList({required this.detailsList});
+  UserList({required this.detailsList});
 
   @override
   Widget build(BuildContext context) {
