@@ -66,12 +66,16 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
           OutlinedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    CupertinoPageRoute(builder: (context) => const OnBoardScreen()));
-              },
-              child: Text("OnBoard Screen", style: TextStyle(color: Colors.black),),
-
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                      builder: (context) => const OnBoardScreen()));
+            },
+            child: Text(
+              "OnBoard Screen",
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           SizedBox(height: 20),
           OutlinedButton(
@@ -79,9 +83,11 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(context,
                   CupertinoPageRoute(builder: (context) => FormValidator()));
             },
-            child: const Text("Form Validator", style: TextStyle(color: Colors.black),),
-
-          )
+            child: const Text(
+              "Form Validator",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
         ],
       ),
     );
